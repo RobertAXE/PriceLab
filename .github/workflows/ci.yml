@@ -27,3 +27,15 @@ jobs:
 
       - name: Run benchmarks
         run: ./build/pricelab_benchmarks --benchmark_min_time=0.1s
+
+      - name: Install Doxygen
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen
+
+      - name: Generate documentation
+        run: doxygen docs/Doxyfile
+
+      - name: Verify documentation
+        run: test -f build/docs/html/index.html
+

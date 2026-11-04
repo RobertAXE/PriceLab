@@ -1,0 +1,17 @@
+
+PROJECT_NAME           = "PriceLab"
+PROJECT_BRIEF          = "Financial Asset Analyzer"
+
+OUTPUT_DIRECTORY       = build/docs
+
+INPUT                  = include README.md
+RECURSIVE              = YES
+EXTRACT_ALL            = YES
+
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+GENERATE_LATEX         = NO
+
+USE_MDFILE_AS_MAINPAGE = README.md
+
+QUIET                  = YES
