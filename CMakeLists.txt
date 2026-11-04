@@ -41,3 +41,26 @@ target_link_libraries(pricelab_tests PRIVATE
 
 include(GoogleTest)
 gtest_discover_tests(pricelab_tests)
+
+# Google Benchmark
+set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "" FORCE)
+set(BENCHMARK_ENABLE_GTEST_TESTS OFF CACHE BOOL "" FORCE)
+set(BENCHMARK_ENABLE_INSTALL OFF CACHE BOOL "" FORCE)
+
+FetchContent_Declare(
+    googlebenchmark
+    GIT_REPOSITORY https://github.com/google/benchmark.git
+    GIT_TAG v1.9.5
+)
+
+FetchContent_MakeAvailable(googlebenchmark)
+
+# Performance benchmarks
+add_executable(pricelab_benchmarks
+    benchmarks/benchmark_analysis.cpp
+)
+
+target_link_libraries(pricelab_benchmarks PRIVATE
+    pricelab_core
+    benchmark::benchmark
+)
