@@ -1,0 +1,29 @@
+
+name: PriceLab CI
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Configure CMake
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build project
+        run: cmake --build build --parallel 2
+
+      - name: Run unit tests
+        run: ctest --test-dir build --output-on-failure
+
+      - name: Run benchmarks
+        run: ./build/pricelab_benchmarks --benchmark_min_time=0.1s
